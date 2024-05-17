@@ -1,24 +1,63 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Ruby on Rails PICPAY API
 
-Things you may want to cover:
+API baseada no desafio do backend do PICPAY, desenvolvido para estudos em Ruby on Rails.
 
-* Ruby version
+Veja o desafio original aqui:
 
-* System dependencies
+https://github.com/PicPay/picpay-desafio-backend?tab=readme-ov-file
+## Rodando localmente
 
-* Configuration
+Clone o projeto
 
-* Database creation
+```bash
+  git clone https://github.com/rodrigosuco/pay_me_api.git
+```
 
-* Database initialization
+Instale as dependências
 
-* How to run the test suite
+```bash
+  bundle install
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Configure o banco de dados
 
-* Deployment instructions
+```bash
+  rake db:create
+  rake db:migrate
+```
 
-* ...
+Inicie o servidor com uma bind para testar com Postman ou Insomnia
+
+```bash
+  rails s -b 172.17.220.89 -p 3000
+```
+
+Após intalação, crie um usuário passando os parametros numa requisição POST
+
+```bash
+
+  URL: 172.17.220.89:3000/users
+
+  {
+        "nome_completo": "Nome Completo",
+        "cpf": "555.222.222-222",
+        "email": "teste@teste.com",
+        "senha": "senha6caracteres",
+        "saldo": 10.00,
+        "user_type": "comum" (ou "lojista")
+  }
+```
+Crie uma transação/transferencia passando os parametros numa requisição POST
+
+```bash
+
+  URL: 172.17.220.89:3000/transfers
+
+  {
+  	    "user_id": 1,
+        "recebedor": 5,
+        "value": 2500.00
+  }
+```
+
