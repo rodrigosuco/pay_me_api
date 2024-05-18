@@ -29,6 +29,11 @@ class TransfersController < ApplicationController
       return
     end
 
+    if @pagante == @recebedor
+      render json: { error: 'Não pode transferir para sí mesmo' }, status: :unprocessable_entity
+      return
+    end
+
     if @transfer.save
       if check_saldo
         render json: @transfer, status: :created, location: @transfer
